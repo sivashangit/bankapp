@@ -1,5 +1,6 @@
 package com.exam.BankApp.service;
 
+import com.exam.BankApp.exception.AccountNotFoundException;
 import com.exam.BankApp.mapper.AccountMapper;
 import com.exam.BankApp.model.Account;
 import com.exam.BankApp.repository.AccountRepository;
@@ -33,7 +34,7 @@ public class AccountService {
 
     public AccountDto getaccountById(int id){
 
-        Account account=accountRepository.findById(id).orElseThrow(()->new RuntimeException("Account does not exists"));
+        Account account=accountRepository.findById(id).orElseThrow(()->new AccountNotFoundException(id,"Account does not exists"));
         AccountDto accountDto=AccountMapper.maptodto(account);
         return accountDto;
 
